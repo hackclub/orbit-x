@@ -1,11 +1,59 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node.js <script>document.write(process.version)</script>
-    and atom-shell <script>document.write(process.versions['atom-shell'])</script>.
-  </body>
+<body>
+  <div>Minimize to tray</div>
+  <script>
+    function runOrbit() {
+      gui.Shell.openItem(/*Path to orbit*/)
+    }
+    // Load library
+    var gui = require('nw.gui');
+
+    // Reference to window and tray
+    var win = gui.Window.get();
+
+    var tray = new gui.Tray({
+      icon: 'img/icon.png',
+      tooltip: 'Orbit'
+    });
+    var menu = new gui.Menu();
+    menu.append(
+      new gui.MenuItem({
+        icon: 'img/gear.png',
+        label: ' '
+      })
+    );
+    menu.append(new gui.MenuItem({ type: 'separator' }));
+    menu.append(
+      new gui.MenuItem({
+        icon: 'img/android.png',
+        type: 'checkbox',
+        label: 'android'
+      })
+    );
+    menu.append(
+      new gui.MenuItem({
+        icon: 'img/rails.png',
+        type: 'checkbox',
+        label: 'rails'
+      })
+    );
+    menu.append(
+      new gui.MenuItem({
+        icon: 'img/apple.png',
+        type: 'checkbox',
+        label: 'apple'
+      })
+    );
+    menu.append( 
+      new gui.MenuItem({
+        icon: 'img/node.png',
+        type: 'checkbox',
+        label: 'node',
+        click: function () {runOrbit();}
+      })
+    );
+    tray.menu = menu;
+  </script>
+</body>
 </html>
+
